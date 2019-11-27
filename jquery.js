@@ -1,5 +1,10 @@
-window.jQuery = function(selector){//接受一个选择器
-    const elements = document.querySelectorAll(selector)
+window.jQuery = function(selectorOrArray){//接受一个选择器
+    let elements
+    if(typeof selectorOrArray === 'string'){
+        elements = document.querySelectorAll(selectorOrArray)
+    }else if(selectorOrArray instanceof Array){
+        elements = selectorOrArray
+    }
     return {//返回一个对象，可以被链式调用
         addClass(className){   
         for (let i= 0; i < elements.length; i++) {
@@ -12,7 +17,8 @@ window.jQuery = function(selector){//接受一个选择器
             for ( let i = 0; i < elements.length; i++){
                 array = array.concat(Array.from(elements[i].querySelectorAll(selector)))
             }
-            return array //返回数组的话就不能链式操作了啊，待改善。。。。
+            const newApi = jQuery(array)
+            return newApi
         }
     }
 }
