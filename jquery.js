@@ -17,8 +17,7 @@ window.jQuery = function(selectorOrArray){//接受一个选择器
             for ( let i = 0; i < elements.length; i++){
                 array = array.concat(Array.from(elements[i].querySelectorAll(selector)))
             }
-            const newApi = jQuery(array)
-            return newApi
+            return jQuery(array)// jquery 传啥返回啥
         }
     }
 }
