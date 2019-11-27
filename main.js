@@ -1,1 +1,2 @@
-jQuery('.test').addClass('red').addClass('blue')
+const x = jQuery('.test').find('.child')
+console.log(x)
