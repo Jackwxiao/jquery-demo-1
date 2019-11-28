@@ -19,6 +19,7 @@ window.jQuery = function(selectorOrArrayOrTemplate){//接受一个选择器或�
 
     return {//返回一个对象，可以被链式调用
         jquery: true,
+        elements: elements,
         addClass(className){   
         for (let i= 0; i < elements.length; i++) {
             elements[i].classList.add(className)
@@ -69,6 +70,15 @@ window.jQuery = function(selectorOrArrayOrTemplate){//接受一个选择器或�
                 this.each( el => node.appendChild(el))
             }else if(node.jquery=== true){
                 this.each( el => node.get(0).appendChild(el))
+            }
+        },
+        append(children){
+            if(children instanceof Element){
+                this.get(0).appendChild(children)
+            }else if(children instanceof HTMLCollection){
+                children.each(node=> this.get(0).appendChild(children[node]))
+            }else if(children.jquery === true){
+                children.each(node => this.get(0).appendChild(node))
             }
         },
         end(){
