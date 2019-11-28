@@ -1,2 +1,2 @@
-jQuery('.test')
+$('.test')
     .children().print()

@@ -53,3 +53,4 @@ window.jQuery = function(selectorOrArray){//接受一个选择器或数组
         }
     }
 }
+window.$ = window.jQuery
