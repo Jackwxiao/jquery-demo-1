@@ -60,6 +60,12 @@ window.jQuery = function(selectorOrArrayOrTemplate){//接受一个选择器或�
         print(){
             console.log(elements)
         },
+        get(index){
+            return elements[index]
+        },
+        appendTo(node){
+            node.appendChild(this.get(0))//假设只有一个元素
+        },
         end(){
             return this.oldApi //this指 新api
         }
