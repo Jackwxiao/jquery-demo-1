@@ -1,10 +1,22 @@
-window.jQuery = function(selectorOrArray){//接受一个选择器或数组
+window.jQuery = function(selectorOrArrayOrTemplate){//接受一个选择器或数组
     let elements
-    if(typeof selectorOrArray === 'string'){
-        elements = document.querySelectorAll(selectorOrArray)
-    }else if(selectorOrArray instanceof Array){
-        elements = selectorOrArray
+    if(typeof selectorOrArrayOrTemplate === 'string'){
+        if(selectorOrArrayOrTemplate[0] === '<'){
+            //创建 div
+            elements=[createElement(selectorOrArrayOrTemplate)]
+        }else{
+            //查找div
+            elements = document.querySelectorAll(selectorOrArrayOrTemplate)
+        }
+    }else if(selectorOrArrayOrTemplate instanceof Array){
+        elements = selectorOrArrayOrTemplate
     }
+    function createElement(string){
+        const container = document.createElement("template")
+        container.innerHTML = string.trim()
+        return container.content.firstChild
+    }
+
     return {//返回一个对象，可以被链式调用
         addClass(className){   
         for (let i= 0; i < elements.length; i++) {
@@ -12,7 +24,7 @@ window.jQuery = function(selectorOrArray){//接受一个选择器或数组
         }
         return this //指代 addClass() 对象
         },
-        oldApi: selectorOrArray.oldApi,
+        oldApi: selectorOrArrayOrTemplate.oldApi,
         find(selector){
             let array = []
             for ( let i = 0; i < elements.length; i++){
