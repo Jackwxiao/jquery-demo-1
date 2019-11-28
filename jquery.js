@@ -18,6 +18,7 @@ window.jQuery = function(selectorOrArrayOrTemplate){//接受一个选择器或�
     }
 
     return {//返回一个对象，可以被链式调用
+        jquery: true,
         addClass(className){   
         for (let i= 0; i < elements.length; i++) {
             elements[i].classList.add(className)
@@ -64,7 +65,11 @@ window.jQuery = function(selectorOrArrayOrTemplate){//接受一个选择器或�
             return elements[index]
         },
         appendTo(node){
-            node.appendChild(this.get(0))//假设只有一个元素
+            if(node instanceof Element){
+                this.each( el => node.appendChild(el))
+            }else if(node.jquery=== true){
+                this.each( el => node.get(0).appendChild(el))
+            }
         },
         end(){
             return this.oldApi //this指 新api

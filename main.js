@@ -1,2 +1,3 @@
 const $div = $('<div><span>这是增加的div</span></div>')
-$div.appendTo(document.body)
+const $childList = $('.child')
+$childList.appendTo($('#container'))
